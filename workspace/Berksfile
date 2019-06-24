@@ -1,0 +1,8 @@
+source "https://supermarket.chef.io"
+
+cookbooks_dir = './cookbooks'
+Dir.entries(cookbooks_dir).each do |entry|
+  if File.directory? File.join(cookbooks_dir, entry) and !(entry =='.' || entry == '..')
+    cookbook entry, path: File.join(cookbooks_dir, entry)
+  end
+end

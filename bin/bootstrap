@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/config.rb'
+require_relative '../lib/registry.rb'
+
+config = Masterchef::Config.new
+config.from_file('config.rb')
+
+name = ARGV[0]
+node = Masterchef::Registry.node_by_name(name)
+node.apply_config!(config)
+node.bootstrap

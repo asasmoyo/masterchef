@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/config.rb'
+require_relative '../lib/registry.rb'
+
+config = Masterchef::Config.new
+config.from_file('config.rb')
+
+name, ip_address = ARGV
+node = Masterchef::Registry.add_node(name, ip_address)
+node.save!
+node.apply_config!(config)
+node.bootstrap
